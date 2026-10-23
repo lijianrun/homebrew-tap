@@ -7,8 +7,7 @@ Homebrew formulae.
 Evidence-backed interactive diagrams for understanding code repositories (CLI + Claude Code skill).
 
 ```bash
-brew install lijianrun/tap/repolens
-repolens-install-skill        # installs the Claude Code skill into ~/.claude/skills/repolens
+brew install lijianrun/tap/repolens && repolens install   # skill for Claude Code / Codex / Cursor
 ```
 
 Then ask Claude: "用 repolens 梳理 <仓库路径>" / "use repolens to map <repo>".

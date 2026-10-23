@@ -2,7 +2,7 @@ class Repolens < Formula
   desc "Evidence-backed interactive diagrams for understanding code repositories"
   homepage "https://github.com/lijianrun/repolens"
   # Private source: installing needs read access to lijianrun/repolens over SSH (git@github.com).
-  url "git@github.com:lijianrun/repolens.git", using: :git, tag: "v0.3.0", revision: "35f25bd3c87277503f5d3568d1aa2603b1c05c9a"
+  url "git@github.com:lijianrun/repolens.git", using: :git, tag: "v0.4.0", revision: "04f1e41a3ba8f7a16e1634450928077edf59c251"
   license "MIT"
 
   depends_on "node"
@@ -15,10 +15,14 @@ class Repolens < Formula
       #!/bin/bash
       exec "#{formula_opt_bin("node")}/node" "#{libexec}/bin/repolens.mjs" "$@"
     SH
-    # The installer reads git metadata of its own checkout; a keg is not one.
-    inreplace libexec/"scripts/install-skill.sh" do |s|
-      s.gsub!(/^REV=.*$/, "REV=\"v#{version} (homebrew)\"")
-      s.gsub!(/^DIRTY=.*$/, "DIRTY=0")
+    # Releases up to 0.3.0 shipped a bash installer that read git metadata of its own checkout (a keg is not one).
+    # From 0.4.0 `repolens install` does this in Node and install-skill.sh only delegates to it.
+    legacy = libexec/"scripts/install-skill.sh"
+    if legacy.read.match?(/^REV=/)
+      inreplace legacy do |s|
+        s.gsub!(/^REV=.*$/, "REV=\"v#{version} (homebrew)\"")
+        s.gsub!(/^DIRTY=.*$/, "DIRTY=0")
+      end
     end
     (bin/"repolens-install-skill").write_env_script libexec/"scripts/install-skill.sh",
       PATH: "#{formula_opt_bin("node")}:$PATH"
@@ -26,11 +30,12 @@ class Repolens < Formula
 
   def caveats
     <<~EOS
-      Install the Claude Code skill (copies files to ~/.claude/skills/repolens):
-        repolens-install-skill
-      Project-level instead:
-        repolens-install-skill --project /path/to/project
-      Then ask Claude: "用 repolens 梳理 <仓库路径>" / "use repolens to map <repo>".
+      Add the RepoLens skill to your AI coding tools (Claude Code, Codex, Cursor):
+        repolens install
+      Project-level instead:  repolens install --scope project --project /path/to/project
+      Status / uninstall:     repolens install --status | repolens install --uninstall
+      (repolens-install-skill still works and installs for Claude Code.)
+      Then ask your AI: "use RepoLens to map the cart flow in this repository".
 
       Browser checks need a local Chrome/Chromium (or set REPOLENS_CHROME).
     EOS
