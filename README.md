@@ -12,5 +12,5 @@ brew install lijianrun/tap/repolens && repolens install   # skill for Claude Cod
 
 Then ask Claude: "用 repolens 梳理 <仓库路径>" / "use repolens to map <repo>".
 
-The source repository is private: installing needs read access to `lijianrun/repolens`
-with an SSH key registered on GitHub (`ssh -T git@github.com` should greet you).
+Installs a published release package (this repository's Releases): no GitHub access or SSH key needed.
+The source is not public; RepoLens is licensed for use only (`LICENSE` in the package).
