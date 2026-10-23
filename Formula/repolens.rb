@@ -2,7 +2,7 @@ class Repolens < Formula
   desc "Evidence-backed interactive diagrams for understanding code repositories"
   homepage "https://github.com/lijianrun/repolens"
   # Private source: installing needs read access to lijianrun/repolens over SSH (git@github.com).
-  url "git@github.com:lijianrun/repolens.git", using: :git, tag: "v0.4.1", revision: "1f34c63b7d6ab7549330f42275eb5b0675c9889f"
+  url "git@github.com:lijianrun/repolens.git", using: :git, tag: "v0.4.2", revision: "69560dbb147014dcd90bf6c78c565e71e00edd59"
   license "MIT"
 
   depends_on "node"
