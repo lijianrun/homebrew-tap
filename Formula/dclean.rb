@@ -2,7 +2,7 @@ class Dclean < Formula
   desc "Deep disk cleaner for macOS with structural build-artifact detection"
   homepage "https://github.com/lijianrun/deep-clean"
   # Private source: installing needs read access to lijianrun/deep-clean over SSH (git@github.com).
-  url "git@github.com:lijianrun/deep-clean.git", using: :git, tag: "v1.0.0", revision: "b910ef6fa509e14877c152645d273c77983f92c3"
+  url "git@github.com:lijianrun/deep-clean.git", using: :git, tag: "v1.0.1", revision: "16504e6fae13da22429b0f8f639b2c0d25cac530"
   license "MIT"
   head "git@github.com:lijianrun/deep-clean.git", using: :git, branch: "main"
 
